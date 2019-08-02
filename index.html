@@ -17,20 +17,20 @@
 <p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x01.jpg" alt="题目"></p>
 <p>获取了一个post参数save_name作为文件名称.进行操作,这里有一个逻辑漏洞.后台先是对file进行判断,如果不是数组才会对他进行分割.</p>
 <p>那么如果我们直接传入一个数组会怎么样呢?</p>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x02.jpg" alt="题目"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x02.jpg" alt="尝试上传"></p>
 <p>成功上传</p>
 <h2 id="但是"><a href="#但是" class="headerlink" title="但是"></a>但是</h2><p>为什么这样就能成功上传?我又读了一遍代码,代码逻辑应该是没问题的啊?也就是说,即使我们用post方式传递的是数组也应该能正确执行才对啊.</p>
 <h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p>在头部添加开启报错信息</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">error_reporting(-1);</span><br><span class="line">ini_set(<span class="string">'display_errors'</span>, 1);</span><br></pre></td></tr></table></figure>
 <p>添加调试信息</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;长度: '</span>.count(<span class="variable">$file</span>).<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;数组: '</span>.print_r(<span class="variable">$file</span>).<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;count -1'</span>.<span class="variable">$file</span>[count(<span class="variable">$file</span>) - 1].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;count -2'</span>.<span class="variable">$file</span>[count(<span class="variable">$file</span>) - 2].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;count -3'</span>.<span class="variable">$file</span>[count(<span class="variable">$file</span>) - 3].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;0  :'</span>.<span class="variable">$file</span>[0].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;1  :'</span>.<span class="variable">$file</span>[1].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'&lt;p&gt;2  :'</span>.<span class="variable">$file</span>[2].<span class="string">'&lt;/p&gt;'</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x03.jpg" alt="题目"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x03.jpg" alt="添加调试信息"></p>
 <p>再次上传,看一下输出</p>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x004.jpg" alt="题目"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x04.jpg" alt="输出内容"></p>
 <p>注意一下这个地方,数组长度为<code>2</code>,数组内容为<code>Array ( [0] =&gt; upload-20.jpg [2] =&gt; jpg )</code>.</p>
 <p>问题好像出来了.从这一行可以看出这个数组好像不是一个索引数组,而是一个关联数组.而且是以数字类型为关联键.</p>
 <p>这也正是为什么调用<code>$file[count($file)-1]</code>的时候会返回空.因为<code>count($file)</code>的值为2,整个语句就是<code>$file[1]</code>.而file数组作为一个关联数组只有0和2两个键,没有名为1的建,所以只能返回空.后面作为后缀名拼接的时候就只有前面的$file[0]作为文件名.</p>
-<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x005.jpg" alt="题目"></p>
+<p><img src="https://raw.githubusercontent.com/gwjczwy/gwjczwy.github.io/master/img/013x05.jpg" alt="好可爱~"></p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/07/12/sql注入笔记/">sql注入笔记</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-12</time><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/技术/">技术</a></span><div class="content"><h1 id="sql注入笔记"><a href="#sql注入笔记" class="headerlink" title="sql注入笔记"></a>sql注入笔记</h1><h2 id="攻防世界"><a href="#攻防世界" class="headerlink" title="攻防世界"></a>攻防世界</h2><p><a href="https://adworld.xctf.org.cn/task/answer?type=web&amp;id=4630" target="_blank" rel="noopener">题目链接</a></p>
 <p>首先拿到题目,首先试下sql注入.居然是sql注入的题目..</p>
 <h3 id="确定注入"><a href="#确定注入" class="headerlink" title="确定注入"></a>确定注入</h3><p><code>hello&#39; or &#39;1&#39;=&#39;1&#39;#</code></p>
