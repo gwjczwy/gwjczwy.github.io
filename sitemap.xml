@@ -2,9 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+<<<<<<< HEAD
+    <loc>http://gwjczwy.github.io/2020/11/04/%E8%A7%A3%E5%86%B3MACOS%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E9%A1%B5%E9%9D%A2%E5%8D%A1%E6%AD%BB/</loc>
+    
+    <lastmod>2020-11-04T11:30:04.147Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://gwjczwy.github.io/2020/07/20/mysql%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2020-07-30T06:42:14.163Z</lastmod>
+=======
     <loc>http://gwjczwy.github.io/2020/07/30/mysql%E6%8F%90%E6%9D%83%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2020-07-30T08:11:35.245Z</lastmod>
+>>>>>>> bffb56083335668a643006266693c842b99ad575
     
   </url>
   
